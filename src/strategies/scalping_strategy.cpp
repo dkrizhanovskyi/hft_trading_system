@@ -1,23 +1,25 @@
 #include "scalping_strategy.h"
+#include <atomic>    // Для атомарного счетчика в многопоточной среде
+
+// Атомарный счетчик для многопоточной среды
+std::atomic<int> tradesExecuted_{0};
 
 // Configures the scalping strategy with necessary parameters.
-// This is a placeholder function for future implementation where the config parameter
-// would contain actual settings like thresholds, trade size, or other parameters.
+// Future implementation where config will contain real settings.
 void ScalpingStrategy::configure([[maybe_unused]] const std::string& config) {
-    // Logic for parsing and applying configuration would go here.
+    // Parsing and applying configuration will be added here.
 }
 
 // Executes the scalping strategy.
-// In this example, it simply simulates a trade execution by incrementing the trade counter
-// and outputs the total number of trades executed. In a real system, this would involve
-// checking market conditions and making a trade decision based on the threshold.
+// Now uses atomic increment for trade execution to ensure thread safety.
 void ScalpingStrategy::execute() {
+    // Increment the trade counter atomically
     tradesExecuted_++;
-    std::cout << "Scalping trade executed! Total trades: " << tradesExecuted_ << std::endl;
+    std::cout << "Scalping trade executed! Total trades: " << tradesExecuted_.load() << std::endl;
 }
 
 // Analyzes the results of the scalping strategy.
-// This function returns a string summarizing the number of trades executed by the strategy.
+// Uses atomic load to safely retrieve the trade counter.
 std::string ScalpingStrategy::analyzeResults() const {
-    return "Scalping strategy executed " + std::to_string(tradesExecuted_) + " trades.";
+    return "Scalping strategy executed " + std::to_string(tradesExecuted_.load()) + " trades.";
 }

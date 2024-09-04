@@ -4,6 +4,7 @@
 #include "base_strategy.h"
 #include <iostream>
 #include <string>
+#include <atomic>  // Добавлено для атомарных операций
 
 // ScalpingStrategy is a derived class from BaseStrategy.
 // This class implements a simple scalping strategy where trades are triggered
@@ -32,7 +33,7 @@ private:
     double threshold_ = 0.01;
 
     // Counter for the number of trades executed.
-    int tradesExecuted_ = 0;
+    std::atomic<int> tradesExecuted_{0};  // Используем атомарную переменную
 };
 
 #endif // SCALPING_STRATEGY_H

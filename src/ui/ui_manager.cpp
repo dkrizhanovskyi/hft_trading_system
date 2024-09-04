@@ -1,5 +1,6 @@
 #include "ui_manager.h"
-#include <iostream>  // For console input/output
+#include <iostream>
+#include <future>  // Для асинхронной обработки
 
 // Display the main menu to the user.
 // This method outputs a text-based menu with options for the user to choose.
@@ -10,8 +11,8 @@ void UIManager::displayMainMenu() {
     std::cout << "3. Exit\n";
 }
 
-// Handle user input based on their menu selection.
-// Depending on the input, the method will either display metrics, execute a strategy, or exit the application.
+// Handle user input asynchronously based on their menu selection.
+// This allows non-blocking handling of the user's input and improves performance in larger systems.
 void UIManager::handleUserInput(const std::string& input) {
     if (input == "1") {
         displayMetrics();  // Show system metrics
@@ -19,7 +20,11 @@ void UIManager::handleUserInput(const std::string& input) {
         std::string strategyName;
         std::cout << "Enter strategy name: ";
         std::cin >> strategyName;
-        executeStrategy(strategyName);  // Execute the specified strategy
+
+        // Asynchronous execution of the strategy to avoid blocking the main thread
+        std::async(std::launch::async, [this, strategyName]() {
+            executeStrategy(strategyName);
+        });
     } else if (input == "3") {
         std::cout << "Exiting...\n";
     } else {

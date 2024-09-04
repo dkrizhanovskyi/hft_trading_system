@@ -1,5 +1,7 @@
 #include "order_executor.h"
 #include <iostream>  // For printing order execution information
+#include <atomic>    // For atomic operations in multithreaded environments
+#include <xmmintrin.h>  // For SIMD prefetching
 
 // Constructor that initializes the exchange connector with the provided exchange URL.
 // The constructor attempts to connect to the exchange upon initialization.
@@ -12,6 +14,9 @@ OrderExecutor::OrderExecutor(const std::string& exchangeUrl)
 // If the exchange is connected, a unique order ID is generated and the order is sent.
 void OrderExecutor::sendOrder(const std::string& orderDetails) {
     if (exchangeConnector_.isConnected()) {
+        // Prefetching the order details into the cache to reduce latency
+        _mm_prefetch(orderDetails.data(), _MM_HINT_T0);
+        
         int orderId = generateOrderId();
         std::cout << "Order sent to exchange. Order ID: " << orderId 
                   << ", Details: " << orderDetails << std::endl;
@@ -27,8 +32,9 @@ bool OrderExecutor::checkOrderStatus(int orderId) const {
     return true;
 }
 
-// Generates a unique order ID by incrementing a static counter.
+// Generates a unique order ID by incrementing a static atomic counter.
+// This ensures thread-safe generation of unique order IDs in a multithreaded environment.
 int OrderExecutor::generateOrderId() const {
-    static int currentId = 0;
-    return ++currentId;
+    static std::atomic<int> currentId{0};
+    return ++currentId;  // Atomically increment and return the order ID
 }
