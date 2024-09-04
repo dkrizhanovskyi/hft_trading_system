@@ -1,4 +1,3 @@
-# .github/workflows/ci.yml
 name: CI Pipeline
 
 on:
@@ -22,6 +21,13 @@ jobs:
 
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y cmake g++ googletest
+
+    - name: Build Google Test
+      run: |
+        cd /usr/src/gtest
+        sudo cmake .
+        sudo make
+        sudo cp *.a /usr/lib
 
     - name: Build project
       run: |
