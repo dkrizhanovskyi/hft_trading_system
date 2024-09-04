@@ -1,0 +1,56 @@
+# CMake build directories and files
+build/
+cmake-build-*/
+
+# Generated files by CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Compiler generated files
+*.o
+*.obj
+*.so
+*.a
+*.out
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE-specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore coverage and test results
+*.gcno
+*.gcda
+*.gcov
+*.profraw
+
+# Ignore compiled dynamic libraries
+*.dll
+*.dylib
+
+# Ignore Docker artifacts
+docker-compose.override.yml
+*.env
+
+# Ignore GitHub Actions cache and workflow artifacts
+.github/
+
+# Ignore Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+
+# Ignore any secret files or sensitive configs (if any)
+.env

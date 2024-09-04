@@ -1,0 +1,10 @@
+build/
+cmake-build-*/
+.vscode/
+.idea/
+.git/
+.gitignore
+*.log
+*.tmp
+Dockerfile
+docker-compose.yml

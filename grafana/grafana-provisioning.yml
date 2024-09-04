@@ -1,0 +1,17 @@
+# grafana/grafana-provisioning.yml
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    url: http://prometheus:9090
+    access: proxy
+    isDefault: true
+
+dashboards:
+  - name: HFT System Dashboard
+    orgId: 1
+    folder: ""
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards

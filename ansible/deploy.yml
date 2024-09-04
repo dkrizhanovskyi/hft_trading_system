@@ -1,0 +1,16 @@
+# ansible/deploy.yml
+- name: Deploy HFT Trading System
+  hosts: web
+  tasks:
+    - name: Pull the latest version of the Docker image
+      docker_image:
+        name: hft_trading_system
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: hft_system
+        image: hft_trading_system
+        state: started
+        ports:
+          - "8080:8080"

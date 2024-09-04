@@ -1,0 +1,18 @@
+# docker/docker-compose.yml
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+    command: ./HFTTradingSystem
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: trading
+    ports:
+      - "5432:5432"

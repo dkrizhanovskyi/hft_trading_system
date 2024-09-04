@@ -1,0 +1,21 @@
+# kubernetes/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hft-system-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hft-system
+  template:
+    metadata:
+      labels:
+        app: hft-system
+    spec:
+      containers:
+      - name: hft-system
+        image: hft_trading_system:latest
+        ports:
+        - containerPort: 8080
+
