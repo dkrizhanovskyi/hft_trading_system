@@ -20,18 +20,11 @@ jobs:
       uses: jwlawson/actions-setup-cmake@v1
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake g++ googletest
+      run: sudo apt-get update && sudo apt-get install -y cmake g++ python3
 
-    - name: Build Google Test
+    - name: Build GoogleTest
       run: |
-        cd /usr/src/gtest
-        sudo cmake .
-        sudo make
-        sudo cp *.a /usr/lib
-
-    - name: Build project
-      run: |
-        mkdir build
+        mkdir -p build
         cd build
         cmake ..
         make
