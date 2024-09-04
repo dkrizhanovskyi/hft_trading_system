@@ -44,8 +44,6 @@ Thumbs.db
 docker-compose.override.yml
 *.env
 
-# Ignore GitHub Actions cache and workflow artifacts
-.github/
 
 # Ignore Terraform state files
 terraform.tfstate
