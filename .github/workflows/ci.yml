@@ -24,13 +24,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y cmake g++ python3 libssl-dev libgtest-dev
 
-    # Build GoogleTest
     - name: Build GoogleTest
       run: |
+        sudo apt-get install -y cmake g++ gcc
         cd /usr/src/gtest
-        sudo cmake CMakeLists.txt
+        sudo cmake .
         sudo make
-        sudo cp *.a /usr/lib
+        sudo cp lib/*.a /usr/lib
 
     - name: Configure and Build
       run: |
