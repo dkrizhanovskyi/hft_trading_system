@@ -17,7 +17,12 @@ set_target_properties(backtesting PROPERTIES
 )
 
 # Include directories for strategies and data processing modules
-target_include_directories(backtesting PUBLIC ../strategies ../data_processing)
+# Use the new include directory paths
+target_include_directories(backtesting PUBLIC 
+    ${CMAKE_SOURCE_DIR}/include/strategies
+    ${CMAKE_SOURCE_DIR}/include/data_processing
+    ${CMAKE_SOURCE_DIR}/include/backtesting
+)
 
 # Link the strategies and data processing libraries
 target_link_libraries(backtesting PUBLIC strategies data_processing)

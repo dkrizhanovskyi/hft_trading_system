@@ -20,13 +20,15 @@ set_target_properties(logging_monitoring PROPERTIES
 # This allows other modules to include the headers from this library.
 target_include_directories(logging_monitoring
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}                    # Включаем текущую директорию
+        ${CMAKE_SOURCE_DIR}/include/logging_monitoring # Включаем заголовочные файлы в include/logging_monitoring
 )
 
 # Link external libraries if necessary (currently commented out)
 # target_link_libraries(logging_monitoring PUBLIC some_library)
 
 # Enable strict warnings and compile optimizations (optional, currently commented out)
+# Uncomment to enable these flags during development.
 # target_compile_options(logging_monitoring PRIVATE
 #     -Wall -Wextra -pedantic -Werror
 # )

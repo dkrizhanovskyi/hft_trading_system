@@ -23,12 +23,12 @@ set_target_properties(risk_management PROPERTIES
 target_include_directories(risk_management
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/include/security_module
+        ${CMAKE_SOURCE_DIR}/include/risk_management
 )
 
-# Link additional external libraries here if required (currently commented out).
-# target_link_libraries(risk_management PUBLIC some_external_library)
-
-# Enable strict warnings and compile optimizations (commented out for now).
-# target_compile_options(data_processing PRIVATE
-#     -Wall -Wextra -pedantic -Werror
-# )
+# Link the security module with order execution.
+target_link_libraries(risk_management
+    PUBLIC
+        security_module  # Link security_module to provide cryptographic functions
+)

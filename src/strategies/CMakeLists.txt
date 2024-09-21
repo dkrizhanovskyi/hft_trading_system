@@ -26,6 +26,7 @@ set_target_properties(strategies PROPERTIES
 target_include_directories(strategies
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}  # Include the current directory as a public include path
+        ${CMAKE_SOURCE_DIR}/include/strategies  # Include the header files in include/strategies
 )
 
 # Link any additional libraries if needed (currently commented out).

@@ -21,12 +21,12 @@ set_target_properties(order_execution PROPERTIES
 target_include_directories(order_execution
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/include/security_module
+        ${CMAKE_SOURCE_DIR}/include/order_execution
 )
 
-# Link external libraries if necessary (currently commented out)
-# target_link_libraries(order_execution PUBLIC some_library)
-
-# Enable strict warnings and compile optimizations (optional, currently commented out)
-# target_compile_options(order_execution PRIVATE
-#     -Wall -Wextra -pedantic -Werror
-# )
+# Link the security module with order execution.
+target_link_libraries(order_execution
+    PUBLIC
+        security_module  # Link security_module to provide cryptographic functions
+)
